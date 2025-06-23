@@ -1,4 +1,7 @@
-# Image Dataset Preparation Tools
+# 🤖 Image Dataset Preparation Tools 🤖  
+<p align="center">  
+  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/wizardPic.png" alt="OARC img anno wizard" width="450"/>  
+</p>
 
 A collection of Python tools for preparing image datasets with GPU acceleration and metadata management.
 

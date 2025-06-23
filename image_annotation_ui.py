@@ -1,7 +1,10 @@
-#!/usr/bin/env python3
-"""
+"""image_annotation_ui.py
+
 Modern Image Annotation UI
 A sleek PyQt6 interface for image format conversion and text annotation management.
+
+Author: @BorcherdingL
+Date: 6/22/2025
 """
 
 import sys

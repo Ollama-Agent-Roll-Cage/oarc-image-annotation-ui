@@ -1,8 +1,11 @@
-#!/usr/bin/env python3
-"""
+"""image_format_master.py
+
 GPU-Accelerated Image Format Converter
 Converts all images in a directory to specified format (JPG or PNG), including HEIC files.
 Uses GPU acceleration with OpenCV and concurrent processing for maximum speed.
+
+Author: @BorcherdingL
+Date: 6/22/2025
 """
 
 # Import necessary libraries

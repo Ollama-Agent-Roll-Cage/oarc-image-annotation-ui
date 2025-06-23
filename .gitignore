@@ -27,6 +27,10 @@ output_images/
 *.png
 *.heic
 
+# But include assets
+!assets/
+!assets/**
+
 # System files
 .DS_Store
 Thumbs.db

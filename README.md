@@ -61,7 +61,7 @@ python image_annotation_ui.py
 ```
 
 <p align="center">  
-  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="750"/>  
+  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="900"/>  
 </p>
 
 ## Documentation

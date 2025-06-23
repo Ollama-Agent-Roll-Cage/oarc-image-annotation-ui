@@ -57,6 +57,12 @@ processor = ImageAnnotationProcessor(
     output_dir="./output_images"
 )
 ```
+### 3. Run the combined UI
+Combines the format master with the metadata csv compiler to create a unified workspace with pyqt6 for simple image annotation.
+
+<p align="center">  
+  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="450"/>  
+</p>
 
 ## Documentation
 

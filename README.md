@@ -50,7 +50,7 @@ python image_format_master.py <input_dir> <output_dir> [format] [quality]
 Tool for managing image annotations and generating metadata CSV files.
 
 ```bash
-python img_text_annotation_csv.py <input_dir> <output_dir>
+python image_text_annotation_csv.py <input_dir> <output_dir>
 ```
 
 ### 3. Run the combined UI

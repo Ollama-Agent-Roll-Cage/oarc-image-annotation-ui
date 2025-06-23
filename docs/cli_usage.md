@@ -40,11 +40,17 @@ python image_format_master.py
 ### Command Line Usage
 
 ```bash
-python img_text_annotation_csv.py <input_dir> <output_dir>
+python image_text_annotation_csv.py <input_dir> <output_dir>
 ```
 
 ### Example Usage with Annotations
 
 ```bash
-python img_text_annotation_csv.py ./images ./annotated
+python image_text_annotation_csv.py ./images ./annotated
+```
+
+### UI usage
+
+```bash
+python image_annotation_ui.py
 ```

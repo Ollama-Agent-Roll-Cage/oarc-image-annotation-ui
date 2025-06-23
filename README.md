@@ -49,19 +49,19 @@ python image_format_master.py <input_dir> <output_dir> [format] [quality]
 ### 2. Image Text Annotation
 Tool for managing image annotations and generating metadata CSV files.
 
-```python
-from img_text_annotation_csv import ImageAnnotationProcessor
-
-processor = ImageAnnotationProcessor(
-    input_dir="./input_images",
-    output_dir="./output_images"
-)
+```bash
+python img_text_annotation_csv.py <input_dir> <output_dir>
 ```
+
 ### 3. Run the combined UI
 Combines the format master with the metadata csv compiler to create a unified workspace with pyqt6 for simple image annotation.
 
+```bash
+python image_annotation_ui.py
+```
+
 <p align="center">  
-  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="450"/>  
+  <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="750"/>  
 </p>
 
 ## Documentation

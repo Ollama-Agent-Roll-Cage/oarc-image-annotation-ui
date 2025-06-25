@@ -74,7 +74,7 @@ AI-powered annotation using local Ollama models for automatic image description.
 
 Features:
 - Model listing and selection
-- Vision model support (llava, bakllava, etc.)
+- Vision model support (llava, gemma3:4b, llama3.2-vision, etc)
 - Streaming responses
 - Batch annotation processing
 

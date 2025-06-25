@@ -3,7 +3,7 @@
   <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/wizardPic.png" alt="OARC img anno wizard" width="450"/>  
 </p>
 
-A collection of Python tools for preparing image datasets with GPU acceleration and metadata management.
+A collection of Python tools for preparing image datasets with GPU acceleration, metadata management, and AI-powered annotation.
 
 ## Features
 
@@ -13,6 +13,8 @@ A collection of Python tools for preparing image datasets with GPU acceleration 
 - Batch processing capabilities
 - Image annotation management
 - CSV metadata generation
+- **AI-powered image annotation using Ollama models**
+- **Vision model support for automatic image description**
 
 ## Installation
 
@@ -20,6 +22,7 @@ A collection of Python tools for preparing image datasets with GPU acceleration 
 
 - Python 3.11 or higher
 - GPU support (optional, for acceleration)
+- **Ollama (optional, for AI annotation features)**
 
 ### Setup with UV (Recommended)
 
@@ -37,6 +40,12 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
 
+### Ollama Setup (Optional)
+For AI annotation features, install Ollama:
+1. Download and install Ollama from [ollama.ai](https://ollama.ai)
+2. Pull a vision model (recommended): `ollama pull llava`
+3. Or pull any text model for basic features: `ollama pull llama2`
+
 ## Modules
 
 ### 1. Image Format Master
@@ -53,12 +62,27 @@ Tool for managing image annotations and generating metadata CSV files.
 python image_text_annotation_csv.py <input_dir> <output_dir>
 ```
 
-### 3. Run the combined UI
-Combines the format master with the metadata csv compiler to create a unified workspace with pyqt6 for simple image annotation.
+### 3. Ollama Tools Integration
+AI-powered annotation using local Ollama models for automatic image description.
+
+Features:
+- Model listing and selection
+- Vision model support (llava, bakllava, etc.)
+- Streaming responses
+- Batch annotation processing
+
+### 4. Combined UI Application
+Combines format conversion, annotation management, and AI tools into a unified PyQt6 interface.
 
 ```bash
 python image_annotation_ui.py
 ```
+
+**New AI Features in UI:**
+- Automatic model detection
+- Vision-based image annotation
+- Batch AI annotation for entire datasets
+- Customizable system prompts
 
 <p align="center">  
   <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/imagePrepUiExample.png" alt="OARC img anno ui" width="900"/>  

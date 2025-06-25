@@ -15,7 +15,6 @@ A collection of Python tools for preparing image datasets with GPU acceleration,
 - Simple Image annotation management system
 - Builds CSV metadata datasets in Hugging Face Format 
 - **Ollama Vision model automatic image annotation**
-- **Ollama Vision model automatic image annotation**
 - Tools for producing high quality human annotated text to image datasets for stable diffusion, pix2pix, and other text to image generation tasks.
 - Tools for producing high quality human annotated image to text datasets for finetuning or training Large Language and Vision Assistants such LLaVa, or Gemma3:4b
 - image to text datasets can also be used for training OCR models.

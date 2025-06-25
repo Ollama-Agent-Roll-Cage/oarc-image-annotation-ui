@@ -138,6 +138,7 @@ ollama list
 - Close other applications to free RAM
 - Consider using CPU-only models for lower-end hardware
 - Consider finetuning your vision model with unsloth, this can be done by making a high quality image annotation dataset that aligns with your goals, finetuning the model, and loading it in oarc-image-annotation-ui (You can learn more in the [unsloth vision fine tuning docs](https://docs.unsloth.ai/basics/vision-fine-tuning))
+- Try modifying the system prompt in the backend code, in the next update I will add a system prompt control box in the settings
 
 ### Python Package Issues
 

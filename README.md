@@ -5,21 +5,24 @@
 
 A collection of Python tools for preparing image datasets with GPU acceleration, metadata management, and AI-powered annotation.
 
-## Features
+## Dataset Types
 
-- Full backend api/module support for all tools
-- GPU-accelerated image format conversion
-- Metadata stripping and standardization
-- Support for HEIC/HEIF formats
-- Batch processing capabilities
-- Simple Image annotation management system
-- Builds CSV metadata datasets in Hugging Face Format 
-- **Ollama Vision model automatic image annotation**
 - Tools for producing high quality human annotated text to image datasets for stable diffusion, pix2pix, and other text to image generation tasks.
 - Tools for producing high quality human annotated image to text datasets for finetuning or training Large Language and Vision Assistants such LLaVa, or Gemma3:4b
 - image to text datasets can also be used for training OCR models.
 - with some simple modifications this toolkit could be used for annotating tons of other dataset types as well, the skys the limit!
   
+## Features
+
+- GPU-accelerated image format conversion
+- Metadata stripping and standardization
+- Support for HEIC/HEIF formats
+- Batch processing capabilities
+- Image annotation management system
+- Builds CSV metadata datasets in Hugging Face Format 
+- **Ollama Vision model automatic image annotation**
+- Scripting with the backend modules is supported
+
 ## Installation
 
 ### Prerequisites

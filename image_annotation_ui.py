@@ -2079,7 +2079,7 @@ class ModernImageAnnotationUI(QMainWindow):
                     return None, "Failed to convert image to base64"
                 
                 # Generate annotation
-                prompt = "Describe this image in detail. Focus on the main subjects, objects, actions, colors, composition, and any notable features. Be descriptive but concise."
+                prompt = self.system_prompt  # Use the system prompt
                 
                 annotation = loop.run_until_complete(
                     self.ollama_commands.vision_chat(
@@ -2101,20 +2101,20 @@ class ModernImageAnnotationUI(QMainWindow):
         def handle_result():
             if progress.wasCanceled():
                 return
-                
+            
             try:
                 annotation, error = future.result(timeout=60)  # 60 second timeout
                 progress.close()
                 
                 if error:
-                    QMessageBox.critical(self, "AI Annotation Error", f"Failed to generate annotation:\n{error}")
+                    QMessageBox.critical(self, "AI Error", f"Error generating annotation: {error}")
                 elif annotation:
-                    # Update the annotation text area
-                    self.annotation_text.setPlainText(annotation.strip())
-                    QMessageBox.information(self, "AI Annotation Complete", 
-                        f"Generated annotation for {current_image.name}")
+                    # Update annotation in UI thread
+                    self.annotation_text.setPlainText(annotation)
+                    self.save_annotation()
+                    QMessageBox.information(self, "AI Annotation", "Annotation generated successfully!")
                 else:
-                    QMessageBox.warning(self, "AI Annotation", "No annotation generated.")
+                    QMessageBox.warning(self, "No Response", "AI model returned no annotation.")
                     
             except Exception as e:
                 progress.close()
@@ -2126,9 +2126,9 @@ class ModernImageAnnotationUI(QMainWindow):
                 handle_result()
             elif not progress.wasCanceled():
                 QTimer.singleShot(100, check_result)
-                
+            
         QTimer.singleShot(100, check_result)
-    
+
     def ai_annotate_all(self):
         """Use AI to annotate all images in the dataset"""
         if not self.selected_model:
@@ -2141,13 +2141,13 @@ class ModernImageAnnotationUI(QMainWindow):
         
         # Confirm batch annotation
         reply = QMessageBox.question(self, "Batch AI Annotation", 
-            f"This will generate AI annotations for all {len(self.image_files)} images using the model '{self.selected_model}'.\n\n"
-            "This may take several minutes. Continue?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-        
+        f"This will generate AI annotations for all {len(self.image_files)} images using the model '{self.selected_model}'.\n\n"
+        "This may take several minutes. Continue?",
+        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+    
         if reply != QMessageBox.StandardButton.Yes:
             return
-        
+    
         # Show progress dialog
         progress = QProgressDialog("Generating AI annotations...", "Cancel", 0, len(self.image_files), self)
         progress.setWindowTitle("Batch AI Annotation")
@@ -2170,9 +2170,8 @@ class ModernImageAnnotationUI(QMainWindow):
                         break
                     
                     try:
-                        # Update progress
-                        progress.setValue(i)
-                        progress.setLabelText(f"Processing {image_path.name}...")
+                        # Update progress (emit signal to main thread)
+                        QMetaObject.invokeMethod(progress, "setValue", Qt.ConnectionType.QueuedConnection, Q_ARG(int, i))
                         
                         # Convert image to base64
                         image_b64 = self.image_to_base64(image_path)
@@ -2181,25 +2180,23 @@ class ModernImageAnnotationUI(QMainWindow):
                             continue
                         
                         # Generate annotation
-                        prompt = "Describe this image in detail. Focus on the main subjects, objects, actions, colors, composition, and any notable features. Be descriptive but concise."
-                        
                         annotation = loop.run_until_complete(
                             self.ollama_commands.vision_chat(
                                 model=self.selected_model,
-                                prompt=prompt,
+                                prompt=self.system_prompt,
                                 image_data=image_b64
                             )
                         )
                         
                         if annotation:
-                            # Save annotation
-                            self.annotations[image_path.name] = annotation.strip()
+                            # Store annotation
+                            self.annotations[image_path.name] = annotation
                             successful_annotations += 1
                         else:
                             failed_annotations += 1
                             
                     except Exception as e:
-                        print(f"Error annotating {image_path.name}: {e}")
+                        print(f"Error processing {image_path.name}: {e}")
                         failed_annotations += 1
                 
                 return True
@@ -2209,14 +2206,14 @@ class ModernImageAnnotationUI(QMainWindow):
                 return False
             finally:
                 loop.close()
-        
+    
         # Run in background thread
         future = self.thread_pool.submit(generate_all_annotations)
         
         def handle_batch_result():
             if progress.wasCanceled():
                 return
-                
+            
             try:
                 success = future.result(timeout=600)  # 10 minute timeout for batch
                 progress.close()
@@ -2224,8 +2221,8 @@ class ModernImageAnnotationUI(QMainWindow):
                 # Update current image annotation if we're viewing an image
                 if self.image_files and self.current_index < len(self.image_files):
                     current_image = self.image_files[self.current_index]
-                    if current_image.name in self.annotations:
-                        self.annotation_text.setPlainText(self.annotations[current_image.name])
+                    current_annotation = self.annotations.get(current_image.name, "")
+                    self.annotation_text.setPlainText(current_annotation)
                 
                 # Show results
                 QMessageBox.information(self, "Batch AI Annotation Complete", 
@@ -2238,16 +2235,16 @@ class ModernImageAnnotationUI(QMainWindow):
             except Exception as e:
                 progress.close()
                 QMessageBox.critical(self, "Error", f"Batch annotation error: {str(e)}")
-        
+    
         # Check result periodically
         def check_batch_result():
             if future.done():
                 handle_batch_result()
             elif not progress.wasCanceled():
                 QTimer.singleShot(1000, check_batch_result)  # Check every second for batch
-                
+            
         QTimer.singleShot(1000, check_batch_result)
-    
+
     def image_to_base64(self, image_path):
         """Convert image file to base64 string for Ollama vision"""
         try:

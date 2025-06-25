@@ -1,4 +1,4 @@
-# 🤖 Image Dataset Preparation Tools 🤖  
+# 🤖 oarc-image-annotation-ui 🤖  
 <p align="center">  
   <img src="https://raw.githubusercontent.com/Ollama-Agent-Roll-Cage/oarc-image-annotation-ui/main/assets/wizardPicCrop.png" alt="OARC img anno wizard" width="450"/>  
 </p>

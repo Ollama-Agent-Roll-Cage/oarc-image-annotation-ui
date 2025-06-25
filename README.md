@@ -13,7 +13,7 @@ A collection of Python tools for preparing image datasets with GPU acceleration,
 - Support for HEIC/HEIF formats
 - Batch processing capabilities
 - Simple Image annotation management system
-- Builds a CSV metadata dataset in Hugging Face Format 
+- Builds CSV metadata datasets in Hugging Face Format 
 - **Ollama Vision model automatic image annotation**
 - **Ollama Vision model automatic image annotation**
 - Tools for producing high quality human annotated text to image datasets for stable diffusion, pix2pix, and other text to image generation tasks.
